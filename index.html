@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta name="theme-color" content="#1E3A8A">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Primary SEO -->
+    <title>Anagel Renovations — Modern Design meets Expert Craftsmanship in Greece</title>
+    <meta
+      name="description"
+      content="Anagel provides premium residential and commercial renovations across Athens and Greece. Specializing in kitchen, bath, and full home renewal."
+    />
+    <link rel="canonical" href="https://anagel.com/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+
+    <!-- Theme color (light & dark aware for mobile address bar) -->
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0c1017" />
+
+    <!-- Language alternates -->
+    <link rel="alternate" hreflang="en" href="https://anagel.com/" />
+    <link rel="alternate" hreflang="el" href="https://anagel.com/el/" />
+    <link rel="alternate" hreflang="x-default" href="https://anagel.com/" />
+
+    <!-- Favicons (Placeholder/Default) -->
+    <link rel="icon" href="https://placehold.co/32x32/1E3A8A/ffffff?text=AN" sizes="32x32" type="image/png">
+
+    <!-- Perf hints (safe) -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+<!-- Vercel Speed Insights (no config needed) -->
+<script src="/_vercel/speed-insights/script.js"></script>
+
+<!-- Vercel Web Analytics (optional, lightweight, respects privacy) -->
+<script src="/_vercel/insights/script.js"></script>
+
+    <script>
+      // Respect saved theme early to avoid flash
+      try {
+        const saved = localStorage.getItem("theme");
+        // We will default to light for a renovation company, but support dark mode
+        if (saved === "dark" || (!saved && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      } catch {}
+    </script>
+  </head>
+
+  <!-- IMPORTANT: Primary colors are set for a premium feel (Blue/Gray) -->
+  <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-200 font-sans">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
