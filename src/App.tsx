@@ -22,12 +22,12 @@ import {
 type Lang = "el" | "en";
 
 const Colors = {
-  Primary: "text-indigo-900 dark:text-gray-100",
-  Accent: "bg-[#b79471] hover:bg-[#a68465]",
+  Primary: "text-brand-dark",
+  Accent: "bg-brand-accent hover:bg-brand-accentDark",
   AccentText: "text-white",
-  Background: "bg-gray-50 dark:bg-gray-900",
-  Card: "bg-white dark:bg-gray-800",
-  Border: "border-gray-200 dark:border-gray-700",
+  Background: "bg-brand-bg",
+  Card: "bg-brand-card/95 backdrop-blur",
+  Border: "border-gray-200",
 };
 
 const translations = {
