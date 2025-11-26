@@ -3,6 +3,11 @@ import { motion } from "framer-motion";
 import { ChevronRight, Home, LayoutList, Briefcase, Phone, Zap, ArrowLeft, Send, Globe } from "lucide-react";
 
 // --- Configuration and Mock Data ---
+const getInitialLang = (): Lang => {
+  if (typeof window === "undefined") return "el";
+  const stored = window.localStorage.getItem("site_lang");
+  return stored === "en" || stored === "el" ? (stored as Lang) : "el";
+};
 
 // Core Color Palette (Inspired by Homemakers.gr and Architectural tones)
 const Colors = {
@@ -146,15 +151,15 @@ const projectTitles = {
 };
 
 // --- Context for Language ---
-type Lang = 'el' | 'en';
-const LangContext = React.createContext<{ lang: Lang; setLang: (l: Lang) => void; t: typeof translations['el'] } | null>(null);
+export default function App() {
+  const [lang, setLang] = useState<Lang>(getInitialLang);
+  const t = translations[lang];
 
-const useLang = () => {
-    const ctx = React.useContext(LangContext);
-    if (!ctx) throw new Error("useLang must be used within LangProvider");
-    return ctx;
-};
-
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem("site_lang", lang);
+    document.documentElement.lang = lang === "el" ? "el" : "en";
+  }, [lang]);
 // --- Utility Hook for Hash Routing ---
 function useHashRoute() {
     const get = () => window.location.hash || "#home";
