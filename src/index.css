@@ -5,7 +5,7 @@
 /* Global base styling */
 html,
 body {
-  @apply bg-brand-bg text-brand-dark antialiased;
+  @apply bg-brand-bg text-brand-dark antialiased font-sans;
 }
 
 body {
