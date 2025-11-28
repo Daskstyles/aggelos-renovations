@@ -29,6 +29,45 @@ const Colors = {
   Card: "bg-brand-card/95 backdrop-blur",
   Border: "border-gray-200",
 };
+// Small animated construction visual for the hero
+const ConstructionOrbit: React.FC = () => {
+  return (
+    <div
+      className="hidden lg:block relative w-64 h-64"
+      aria-hidden="true"
+    >
+      {/* Outer slow-rotating ring */}
+      <motion.div
+        className="absolute inset-[-8%] rounded-full border border-white/10"
+        animate={{ rotate: -360 }}
+        transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
+      />
+
+      {/* Inner floating circle with the tools image */}
+      <motion.div
+        className="absolute inset-0 rounded-full overflow-hidden shadow-soft border border-white/20 bg-brand-bg/5"
+        animate={{ y: [0, -6, 0] }}
+        transition={{ repeat: Infinity, duration: 10, ease: "easeInOut" }}
+      >
+        {/* Drop your tools image into /public/tools-hero.jpg */}
+        <img
+          src="/tools-hero.jpg"
+          alt="Εργαλεία ανακαίνισης και κατασκευής"
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-black/40" />
+      </motion.div>
+
+      {/* Small dots around the circle to suggest “services orbit” */}
+      <div className="absolute inset-0">
+        <span className="absolute w-3 h-3 rounded-full bg-brand-accent top-2 left-1/2 -translate-x-1/2" />
+        <span className="absolute w-3 h-3 rounded-full bg-brand-accent bottom-3 left-6" />
+        <span className="absolute w-3 h-3 rounded-full bg-brand-accent bottom-5 right-5" />
+      </div>
+    </div>
+  );
+};
 
 const translations = {
   el: {
@@ -461,40 +500,52 @@ const Footer: React.FC = () => {
 const HeroSection: React.FC = () => {
   const { t } = useLang();
   return (
-    <section className="relative h-[60vh] md:h-[80vh] flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url(https://placehold.co/1920x1080/4f5b66/ffffff?text=Premium+Construction)",
-        }}
-      >
-        <div className="absolute inset-0 bg-black opacity-40" />
+    <section className="relative h-[60vh] md:h-[80vh] flex items-center overflow-hidden">
+      {/* Background gradient (no more placeholder image text) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),_transparent_60%)]" />
       </div>
 
+      {/* Big watermark moved to bottom, faint so it doesn't fight the H1 */}
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        className="pointer-events-none absolute inset-x-0 bottom-10 text-center text-5xl md:text-7xl font-extrabold text-white/5 tracking-[0.2em] uppercase"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-10 text-center max-w-4xl px-4"
+        transition={{ delay: 0.8, duration: 1 }}
       >
-        <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white leading-tight drop-shadow-lg mb-4">
-          {t.hero_h1}
-        </h1>
-        <p className="text-lg sm:text-xl md:text-2xl text-gray-200 font-light drop-shadow-md mb-8">
-          {t.hero_h2}
-        </p>
-        <AccentButton
-          href="#contact"
-          className="text-lg px-10 py-4 shadow-2xl"
-          icon={Zap}
-        >
-          {t.btn_quote}
-        </AccentButton>
+        Premium Construction
       </motion.div>
+
+      {/* Content + animated construction visual */}
+      <div className="relative z-10 max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between px-4 sm:px-6 lg:px-8 w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center lg:text-left max-w-2xl"
+        >
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight drop-shadow-lg mb-4">
+            {t.hero_h1}
+          </h1>
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 font-light drop-shadow-md mb-8">
+            {t.hero_h2}
+          </p>
+          <AccentButton
+            href="#contact"
+            className="text-lg px-10 py-4 shadow-2xl"
+            icon={Zap}
+          >
+            {t.btn_quote}
+          </AccentButton>
+        </motion.div>
+
+        {/* Animated tools “planet” (desktop only) */}
+        <ConstructionOrbit />
+      </div>
     </section>
   );
 };
+
 
 const ServicesSection: React.FC = () => {
   const { t } = useLang();
